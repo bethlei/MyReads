@@ -5,20 +5,17 @@ import SearchBook from './SearchBook'
 import * as BooksAPI from './BooksAPI'
 import './App.css'
 
-class BooksApp extends React.Component {
+class BooksApp extends Component {
   state = {
     books: []
   }
 
   componentDidMount() {
     BooksAPI.getAll().then((books) => {
+      console.log(books)
      this.setState({ books });
     })
   }
-
-  // BooksAPI.getAll().then((books) => {
-  //   console.log(books);
-  // });
 
   render() {
     const { books } = this.state;
