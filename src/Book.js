@@ -16,6 +16,10 @@ class Book extends Component {
   render() {
     const { authors, id, imageLinks: {thumbnail}, title, shelf, shelves, onChangeShelf } = this.props;
 
+    if (!thumbnail) {
+      let thumbnail = './icons/alt-bookcover.png'
+		}
+
     return (
       <div key={id} className="book">
         <div className="book-top">
