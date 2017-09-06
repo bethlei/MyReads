@@ -26,10 +26,13 @@ class BooksApp extends Component {
         <Route exact path='/' render={() => (
           <ListBooks
             books={this.state.books}
+            onChangeShelf={this.changeShelf}
           />
         )}/>
-        <Route path='/search' render={() => (
+        <Route path='/search' render={({ history }) => (
           <SearchBook
+            onAddToShelf={this.AddToShelf}
+            onChangeShelf={this.changeShelf}
           />
         )}/>
       </div>
