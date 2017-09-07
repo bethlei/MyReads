@@ -4,7 +4,7 @@ import { shelfTitle } from './utils'
 
 class Book extends Component {
   static propTypes = {
-    authors: PropTypes.array.isRequired,
+    authors: PropTypes.array,
     id: PropTypes.string.isRequired,
     imageLinks: PropTypes.object,
     title: PropTypes.string.isRequired,
@@ -15,10 +15,6 @@ class Book extends Component {
 
   render() {
     const { authors, id, imageLinks: {thumbnail}, title, shelf, shelves, onChangeShelf } = this.props;
-
-    if (!thumbnail) {
-      let thumbnail = './icons/alt-bookcover.png'
-		}
 
     return (
       <div key={id} className="book">
@@ -35,7 +31,7 @@ class Book extends Component {
           </div>
         </div>
         <div className="book-title">{title}</div>
-        <div className="book-authors">{authors.join(", ")}</div>
+        <div className="book-authors">{authors}</div>
       </div>
     )
   }
