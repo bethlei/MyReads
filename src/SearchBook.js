@@ -6,6 +6,7 @@ import { search } from './BooksAPI';
 
 class SearchBook extends Component {
   static propTypes = {
+    categorizedBooks: PropTypes.array.isRequired,
     shelves: PropTypes.array.isRequired,
     onChangeShelf: PropTypes.func.isRequired
   }
@@ -15,12 +16,23 @@ class SearchBook extends Component {
     queryBooks: []
   }
 
-  searchBooks(query) {
+  searchBooks = (query) => {
     this.setState({ query: query.trim() })
-
+    const cBooks = this.props.categorizedBooks
+    console.log('c', cBooks)
     search(query, 20).then((books) => {
       if (books) {
+        for(let b of books) {
+          for (let c of cBooks) {
+            if(b.id === c.id) {
+              b.shelf = c.shelf
+            } else {
+              b.shelf = 'none'
+            }
+          }
+        }
         this.setState({ queryBooks: books })
+        console.log('queryBooks',this.state.queryBooks)
       } else {
         this.setState({ queryBooks: [] })
       }
@@ -29,7 +41,8 @@ class SearchBook extends Component {
 
   render() {
     const { query, queryBooks } = this.state
-    const { shelves, onChangeShelf } = this.props
+    const { categorizedBooks, shelves, onChangeShelf } = this.props
+    console.log('categorizedBooks',categorizedBooks)
 
     return (
       <div className="search-books">
