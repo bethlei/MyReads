@@ -22,10 +22,15 @@ class BooksApp extends Component {
     })
   }
 
-  changeShelf(book,shelf) {
+  changeShelf = (book,shelf) => {
     console.log(shelf)
-    update(book,shelf).then((shelves)=> {
-      console.log(shelves)
+    update(book,shelf).then(()=> {
+      // we don't actually need the _content_ of the response
+      book.shelf = shelf
+      this.setState({ books: this.state.books
+        .filter(b => b.id !== book.id)
+        .concat([ book ])
+      })
     })
   }
 
