@@ -19,7 +19,6 @@ class SearchBook extends Component {
   searchBooks = (query) => {
     this.setState({ query: query.trim() })
     const cBooks = this.props.categorizedBooks
-    console.log('c', cBooks)
     search(query, 20).then((books) => {
       if (books) {
         for(let b of books) {
@@ -32,7 +31,6 @@ class SearchBook extends Component {
           }
         }
         this.setState({ queryBooks: books })
-        console.log('queryBooks',this.state.queryBooks)
       } else {
         this.setState({ queryBooks: [] })
       }
@@ -41,8 +39,7 @@ class SearchBook extends Component {
 
   render() {
     const { query, queryBooks } = this.state
-    const { categorizedBooks, shelves, onChangeShelf } = this.props
-    console.log('categorizedBooks',categorizedBooks)
+    const { shelves, onChangeShelf } = this.props
 
     return (
       <div className="search-books">

@@ -17,16 +17,13 @@ class BooksApp extends Component {
 
   getBooks() {
     getAll().then((books) => {
-      console.log(books)
      this.setState({ books })
     })
   }
 
   changeShelf = (book,shelf) => {
-    console.log(shelf)
-    console.log('book',book)
     update(book,shelf).then(()=> {
-      // we don't actually need the _content_ of the response
+      // we don't need the _content_ of the response
       book.shelf = shelf
       this.setState({ books: this.state.books
         .filter(b => b.id !== book.id)
@@ -37,7 +34,6 @@ class BooksApp extends Component {
 
   render() {
     const { books, shelves } = this.state;
-    console.log(this.state.books)
 
     return (
       <div>
