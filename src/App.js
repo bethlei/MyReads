@@ -24,6 +24,7 @@ class BooksApp extends Component {
 
   changeShelf = (book,shelf) => {
     console.log(shelf)
+    console.log('book',book)
     update(book,shelf).then(()=> {
       // we don't actually need the _content_ of the response
       book.shelf = shelf
@@ -36,6 +37,7 @@ class BooksApp extends Component {
 
   render() {
     const { books, shelves } = this.state;
+    console.log(this.state.books)
 
     return (
       <div>
