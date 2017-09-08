@@ -13,13 +13,19 @@ class SearchBook extends Component {
 
   state = {
     query: '',
-    queryBooks: []
+    queryBooks: [],
+    error: ''
   }
 
   searchBooks = (query) => {
     this.setState({ query: query.trim() })
     const cBooks = this.props.categorizedBooks
     search(query, 20).then((books) => {
+      if (books.error || books.length < 1) {
+        this.setState({ error: 'No books found' })
+        return
+      }
+
       if (books) {
         for(let b of books) {
           for (let c of cBooks) {
@@ -31,14 +37,12 @@ class SearchBook extends Component {
           }
         }
         this.setState({ queryBooks: books })
-      } else {
-        this.setState({ queryBooks: [] })
       }
     })
   }
 
   render() {
-    const { query, queryBooks } = this.state
+    const { query, queryBooks, error } = this.state
     const { shelves, onChangeShelf } = this.props
 
     return (
@@ -63,22 +67,26 @@ class SearchBook extends Component {
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-            {queryBooks && queryBooks.map(book => {
-              const { id, authors, imageLinks, shelf, title } = book
-              return (
-                <li key={id}>
-                  <Book
-                    authors={authors}
-                    id={id}
-                    imageLinks={imageLinks}
-                    title={title}
-                    shelf={shelf}
-                    shelves={shelves}
-                    onChangeShelf={onChangeShelf}
-                    />
-                </li>
-              )
-            })}
+            {error !== '' ? (
+              <h2 className='error-message'>{error}</h2>
+            ) : (
+              queryBooks.map(book => {
+                const { id, authors, imageLinks, shelf, title } = book
+                return (
+                  <li key={id}>
+                    <Book
+                      authors={authors}
+                      id={id}
+                      imageLinks={imageLinks}
+                      title={title}
+                      shelf={shelf}
+                      shelves={shelves}
+                      onChangeShelf={onChangeShelf}
+                      />
+                  </li>
+                )
+              })
+            )}
           </ol>
         </div>
       </div>

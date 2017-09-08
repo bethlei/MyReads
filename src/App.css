@@ -47,6 +47,7 @@ body, .app {
   background-color: #f5f5f5;
 }
 
+.error-message,
 .bookshelf-title {
   text-transform: capitalize;
   font-size: 45px;
@@ -60,6 +61,11 @@ body, .app {
 }
 .bookshelf-books {
   text-align: center;
+}
+
+.error-message {
+  margin-top: 40px;
+  text-transform: none;
 }
 
 .open-search {
