@@ -18,11 +18,17 @@ class SearchBook extends Component {
   }
 
   searchBooks = (query) => {
-    this.setState({ query: query.trim() })
     const cBooks = this.props.categorizedBooks
+    this.setState({ query: query.trim(), queryBooks: [], error: '' })
+
+    if(query.length < 1) {
+      this.setState({ queryBooks: [], error: '' })
+      return;
+    }
+
     search(query, 20).then((books) => {
       if (books.error || books.length < 1) {
-        this.setState({ error: 'No books found' })
+        this.setState({ queryBooks: [], error: 'No books found' })
         return
       }
 
@@ -36,7 +42,7 @@ class SearchBook extends Component {
             }
           }
         }
-        this.setState({ queryBooks: books })
+        this.setState({ queryBooks: books, error: '' })
       }
     })
   }
