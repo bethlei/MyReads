@@ -5,7 +5,7 @@ import { shelfTitle } from './utils'
 class Book extends Component {
   static defaultProps = {
     authors: [],
-    imageLinks: { thumbnail: './icons/alt-bookcover.png' }
+    imageLinks: { thumbnail: 'https://books.google.com/books/content?id=notfound&printsec=frontcover&img=1&zoom=1&source=gbs_api.svg' }
   }
 
   static propTypes = {
