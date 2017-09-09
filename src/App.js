@@ -8,8 +8,7 @@ import './App.css'
 
 class BooksApp extends Component {
   state = {
-    books: [],
-    shelves: ['currentlyReading','wantToRead','read']
+    books: []
   }
 
   componentDidMount() {
@@ -34,7 +33,8 @@ class BooksApp extends Component {
   }
 
   render() {
-    const { books, shelves } = this.state;
+    const { books } = this.state
+    const shelves = ['currentlyReading','wantToRead','read']
 
     return (
       <div>
