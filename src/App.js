@@ -25,10 +25,11 @@ class BooksApp extends Component {
     update(book,shelf).then(()=> {
       // we don't need the _content_ of the response
       book.shelf = shelf
-      this.setState({ books: this.state.books
-        .filter(b => b.id !== book.id)
-        .concat([ book ])
-      })
+      this.setState(previousState => ({
+        books: previousState.books
+        .filter(b=> b.id !== book.id)
+        .concat([book])
+      }))
     })
   }
 
